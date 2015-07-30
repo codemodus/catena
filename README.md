@@ -7,7 +7,7 @@ Package catena aids the composition of http.Handler wrapper catenas.
 Nesting functions is a simple concept.  If your handler wrapper order does not 
 need to be composable, do not use a package and avoid adding a dependency 
 to your project.  However, nesting functions quickly becomes burdensome as the 
-need for flexibility increases.
+need for flexibility increases. Enter Catena.
 
 ## Usage
 
