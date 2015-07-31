@@ -21,16 +21,16 @@ func Example() {
 	// Each wrapper writes either "0", "1", or "A" to the response body before
 	// and after ServeHTTP() is called.
 	// endHandler writes "_END_" to the response body and returns.
-	catena00 := catena.New(handlerWrapper0, handlerWrapper0)
-	catena00A1 := catena00.Append(handlerWrapperA, handlerWrapper1)
+	cat00 := catena.New(handlerWrapper0, handlerWrapper0)
+	cat00A1 := cat00.Append(handlerWrapperA, handlerWrapper1)
 
-	catena100A1 := catena.New(handlerWrapper1)
-	catena100A1 = catena100A1.Merge(catena00A1)
+	cat100A1 := catena.New(handlerWrapper1)
+	cat100A1 = cat100A1.Merge(cat00A1)
 
 	mux := http.NewServeMux()
-	mux.Handle("/path_implies_body/00_End", catena00.EndFn(endHandler))
-	mux.Handle("/path_implies_body/00A1_End", catena00A1.EndFn(endHandler))
-	mux.Handle("/path_implies_body/100A1_End", catena100A1.EndFn(endHandler))
+	mux.Handle("/path_implies_body/00_End", cat00.EndFn(endHandler))
+	mux.Handle("/path_implies_body/00A1_End", cat00A1.EndFn(endHandler))
+	mux.Handle("/path_implies_body/100A1_End", cat100A1.EndFn(endHandler))
 
 	server := httptest.NewServer(mux)
 
@@ -38,12 +38,10 @@ func Example() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	rBody1, err := getReqBody(server.URL + "/path_implies_body/00A1_End")
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	rBody2, err := getReqBody(server.URL + "/path_implies_body/100A1_End")
 	if err != nil {
 		fmt.Println(err)

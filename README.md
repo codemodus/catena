@@ -32,17 +32,17 @@ import (
 func main() {
     // ...
 
-    catena0 := catena.New(firstWrapper, secondWrapper)
-    catena1 := catena0.Append(handlerWrapper, fourthWrapper)
+    cat0 := catena.New(firstWrapper, secondWrapper)
+    cat1 := cat0.Append(handlerWrapper, fourthWrapper)
 
-    catena2 := catena.New(beforeFirstWrapper)
-    catena2 = catena2.Merge(catena1)
+    cat2 := catena.New(beforeFirstWrapper)
+    cat2 = cat2.Merge(cat1)
 
     m := http.NewServeMux()
-    m.Handle("/1w2w_End1", catena0.EndFn(ctxHandler))
-    m.Handle("/1w2w_End2", catena0.EndFn(anotherCtxHandler))
-    m.Handle("/1w2wHw4w_End1", catena1.EndFn(ctxHandler))
-    m.Handle("/0w1w2wHw4w_End1", catena2.EndFn(ctxHandler))
+    m.Handle("/1w2w_End1", cat0.EndFn(ctxHandler))
+    m.Handle("/1w2w_End2", cat0.EndFn(anotherCtxHandler))
+    m.Handle("/1w2wHw4w_End1", cat1.EndFn(ctxHandler))
+    m.Handle("/0w1w2wHw4w_End1", cat2.EndFn(ctxHandler))
 
     // ...
 }
