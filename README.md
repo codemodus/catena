@@ -68,7 +68,11 @@ convenience, EndFn will adapt functions with compatible signatures.
 
 ## More Info
 
-N/A
+### chain
+
+If a project ends up needing a request context, consider using 
+[chain](https://github.com/codemodus/chain). The API is nearly identical to 
+catena, so adding a request context is easy.
 
 ## Documentation
 
